@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        var map;
+
+        //*********** Initialisation de la carte *********************
+        function initMap() {
+
+            // Map options
+            var nancy = { lat: 48.693514, lng: 6.183311 };
+            var cdf = { lat: 48.6898772, lng: 6.187901 };
+            var iconBase =
+                'https://developers.google.com/maps/documentation/javascript/examples/full/images/';
+
+            var options = {
+                zoom: 14,
+                center: nancy
+            }
+
+            // Affichage de la carte	
+            map = new google.maps.Map(document.getElementById('map'), options);
+
+            // Ajout d'un marker sur Charles de Foucauld
+            var markerStan = new google.maps.Marker({
+                position: nancy, map: map, title: "La plus belle place du monde",
+                icon: 'http://maps.google.com/mapfiles/kml/pal4/icon46.png'
+            });
+
+
+            // Création d'une infobulle (InfoWindow)
+            var infowindow = new google.maps.InfoWindow({
+                content: "La <b>place Stanislas</b> est une place appartenant à un ensemble urbain classique situé à <b>Nancy</b>, dans la région historique de la Lorraine, en France, qui est inscrit au patrimoine mondial de l'UNESCO. Voulue par le duc de Lorraine Stanislas Leszczyński, elle est construite entre 1751 et 1755 sous la direction de l'architecte Emmanuel Héré. Son nom et sa statue centrale évoluent au gré des bouleversements de l'histoire de France ; elle porte son nom actuel depuis 1831. <b><i>Le guide Lonely Planet élit la place Stanislas 4e plus belle place du monde</b></i>"
+            });
+
+            // Ajout d'un gestionnaire d'événement de clic sur le marqueur
+            markerStan.addListener('click', function () {
+                // Ouverture de l'infobulle au clic sur le marqueur
+                infowindow.open(map, markerStan);
+            });
+
+
+            placeStan.setMap(map);
+
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIWVUsZA1IJuoZQgyHvm2imMUmAgyge0w&callback=initMap"
+        async defer></script>
+</body>
+
+</html>
